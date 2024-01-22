@@ -26,6 +26,7 @@ app.use("/api/user", userRouter);
 
 app.use("/api/auth", authRouter);
 
+
 //middlewares
 
 //middleware to send status code
