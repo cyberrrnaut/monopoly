@@ -22,9 +22,9 @@ app.listen(3000, () => {
   console.log("Port is listening on port 3000");
 });
 //apis
-app.use("/test/user", userRouter);
+app.use("/api/user", userRouter);
 
-app.use("/test/user", authRouter);
+app.use("/api/auth", authRouter);
 
 //middlewares
 
