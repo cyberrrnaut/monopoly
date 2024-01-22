@@ -21,7 +21,21 @@ app.use(express.json()); // to send json data to server
 app.listen(3000, () => {
   console.log("Port is listening on port 3000");
 });
-
+//apis
 app.use("/test/user", userRouter);
 
 app.use("/test/user", authRouter);
+
+//middlewares
+
+//middleware to send status code
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server error";
+
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
