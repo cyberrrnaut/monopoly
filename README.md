@@ -21,6 +21,3 @@ Api - https://monopoly-api.vercel.app
   GET /api/user
 ```
 
-
-![Logo](https://images.yourstory.com/cs/images/companies/ca719727ad28-PropacityLogo-1628244913456.jpg)
-
