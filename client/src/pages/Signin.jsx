@@ -9,8 +9,10 @@ import {
 } from "../redux/user/userSlice";
 
 export default function Signin() {
-  const { loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
+
+  const { loading, error } = useSelector((state) => state.user);
+
   // const [error, setError] = useState(null);
   // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ export default function Signin() {
       [e.target.id]: e.target.value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +51,7 @@ export default function Signin() {
     } catch (error) {
       // setLoading(false);
       // setError(error.message);
-      dispatch(signinFailure(data.message));
+      dispatch(signinFailure(error.message));
     }
   };
   return (
