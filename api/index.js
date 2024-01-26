@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 mongoose
@@ -16,6 +18,8 @@ mongoose
 
 const app = express();
 
+app.use(cookieParser());
+
 app.use(express.json()); // to send json data to server
 
 app.listen(3000, () => {
@@ -25,7 +29,6 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 
 app.use("/api/auth", authRouter);
-
 
 //middlewares
 
