@@ -44,9 +44,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-gray-100 rounded-lg shadow-md mt-8">
+    <div className="p-6 max-w-lg mx-auto bg-gray-800 rounded-lg shadow-md mt-8">
       {" "}
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
+      <h1 className="text-3xl text-white text-center font-semibold my-7">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
@@ -79,7 +79,7 @@ export default function SignUp() {
 
         {/* <OAuth/> */}
       </form>
-      <div className="flex items-center justify-between mt-5">
+      <div className="text-white flex items-center justify-between mt-5">
         <p>Already have an account?</p>
         <Link to="/sign-in" className="text-blue-700 hover:underline">
           Sign in
