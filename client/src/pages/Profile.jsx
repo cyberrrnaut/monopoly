@@ -11,9 +11,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
-  // deleteUserStart,
-  // deleteUserSuccess,
-  // deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
   // signOutUserStart,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
