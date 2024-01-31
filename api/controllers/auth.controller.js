@@ -44,6 +44,7 @@ export const signin = async (req, res, next) => {
   }
 };
 
+// google Oauth controller
 export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -79,5 +80,15 @@ export const google = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
+  }
+};
+
+export const signout = async (req, res, next) => {
+  //clearing the cookie
+  try {
+    res.clearCookie("access_token");
+    res.status(200).json("User has been logged out successfully!");
+  } catch (err) {
+    next(err);
   }
 };
