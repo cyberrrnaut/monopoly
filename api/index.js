@@ -6,6 +6,9 @@ import authRouter from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
 
+import cors from "cors";
+import morgan from "morgan";
+
 dotenv.config();
 
 mongoose
@@ -19,29 +22,33 @@ mongoose
 
 const app = express();
 
+//cors whitelisting
+app.use(cors());
+
 app.use(cookieParser());
 
 app.use(express.json()); // to send json data to server
 
-app.listen(3000, () => {
-  console.log("Port is listening on port 3000");
+app.use(morgan("dev"));
+
+app.listen(3001, () => {
+  console.log("Port is listening on port 3001");
 });
 //apis
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/listing",listingRouter);
-  
+app.use("/api/listing", listingRouter);
 
 //middlewares
 
 //middleware to send status code
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Internal Server error";
+// app.use((err, req, res, next) => {
+//   const statusCode = err.statusCode || 500;
+//   // const message = err.message || "Internal Server error";
 
-  return res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  });
-});
+//   return res.status(statusCode).json({
+//     success: false,
+//     statusCode,
+//     message,
+//   });
+// });
