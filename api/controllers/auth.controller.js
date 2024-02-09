@@ -41,7 +41,6 @@ export const signin = async (req, res, next) => {
 
     res.cookie("token", token, { httpOnly: true });
     res.status(200).json(rest);
-    
   } catch (error) {
     next(error);
   }
@@ -89,7 +88,7 @@ export const google = async (req, res, next) => {
 export const signout = async (req, res, next) => {
   //clearing the cookie
   try {
-    res.clearCookie("access_token");
+    res.clearCookie("token");
     res.status(200).json("User has been logged out successfully!");
   } catch (err) {
     next(err);

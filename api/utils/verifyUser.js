@@ -1,16 +1,24 @@
 import jwt from "jsonwebtoken";
 import { errorHandler } from "./error.js";
 
-export const verifyToken = (req, res, next) => {
-  const token = req.cookies.access_token;
-  
-  console.log(req);
- 
-  if (!token) return next(401, "Unauthorized access");
+export const verifyToken = async (req, res, next) => {
+  const token = req.cookies.token;
+  console.log(token);
+  if (!token) {
 
-  jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
-    if (error) return next(errorHandler(403, "Forbidden"));
+    next(errorHandler(401, "Unauthorized"));
+  }
+  try {
+    const user = await jwt.verify(token, process.env.JWT_SECRET);
+    // console.log(userDetails);
     req.user = user;
+
     next();
-  });
+  } catch (err) {
+    next(errorHandler(401, "Unauthorized"));
+    
+ 
+  }
+
+  
 };

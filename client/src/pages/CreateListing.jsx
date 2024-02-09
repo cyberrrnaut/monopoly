@@ -22,8 +22,8 @@ export default function CreateListing() {
     type: "rent",
     bedrooms: 1,
     bathrooms: 1,
-    regularPrice: 10000,
-    discountPrice: 5000,
+    regularPrices: 10000,
+    discountPrices: 5000,
     offer: false,
     parking: false,
     furnished: false,
@@ -32,7 +32,7 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  // console.log(formData);
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -128,28 +128,21 @@ export default function CreateListing() {
     e.preventDefault();
     try {
       // Send POST request to the correct backend server URL
-      const res = await axios.post(
-        "http://localhost:3001/api/listing/create",
-        formData
+      const { data } = await axios.post(
+        "http://localhost:3000/api/listing/create",
+
+        formData,
+
+        {
+          withCredentials: true,
+        }
       );
 
-      // const res = await fetch('http://localhost:3001/api/listing/create', {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     ...formData,
-      //     userRef: currentUser._id,
-      //   }),
-      // });
-      // const data = await res.json();
+ 
       setLoading(false);
-      if (data.success === false) {
-        setError(data.message);
-      }
       navigate(`/listing/${data._id}`);
     } catch (error) {
+      console.log(error);
       setError(error.message);
       setLoading(false);
     }
@@ -273,13 +266,13 @@ export default function CreateListing() {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                id="regularPrice"
+                id="regularPrices"
                 min="10000"
                 max="10000000"
                 required
                 className="p-3 border border-gray-300 rounded-lg text-white bg-gray-800"
                 onChange={handleChange}
-                value={formData.regularPrice}
+                value={formData.regularPrices}
               />
               <div className="flex flex-col items-center">
                 <p className="text-white">Regular price</p>
@@ -295,13 +288,13 @@ export default function CreateListing() {
               <div className="flex items-center gap-2">
                 <input
                   type="number"
-                  id="discountPrice"
+                  id="discountPrices"
                   min="0"
                   max="10000000"
                   required
                   className="p-3 border border-gray-300 rounded-lg text-white bg-gray-800"
                   onChange={handleChange}
-                  value={formData.discountPrice}
+                  value={formData.discountPrices}
                 />
                 <div className="flex flex-col items-center">
                   <p className="text-white">Discounted price</p>

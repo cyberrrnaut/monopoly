@@ -5,13 +5,15 @@ import bcryptjs from "bcryptjs";
 
 export const testfunc = (req, res) => {
   res.json({
-    message: "api working",
+    message: "api working smoothly",
   });
 };
 
 //update user controller
 export const updateUser = async (req, res, next) => {
+  console.log(req.params.id);   console.log(req.user.id);
   if (req.user.id !== req.params.id)
+  
     return next(errorHandler(401, "You can only update your own account!"));
   try {
     if (req.body.password) {
